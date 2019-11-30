@@ -69,7 +69,22 @@ class KaraokeBarTest < MiniTest::Test
     assert_equal(1, @room1.number_of_guests_in_room)
   end
 
-  def test_can_check_guest_out_of_selected_room
+  # def test_can_check_guest_into_selected_room__guest_already_in_room
+  #   guest_already_in_room = @karaoke_bar.check_guest_in(@room1, @guest1)
+  #   assert_equal("#{@guest1.name} is already in this room!", guest_already_in_room)
+  # end
+
+  def test_can_check_guest_out_of_selected_room__guest_is_in_room
+    @karaoke_bar.check_guest_in(@room1, @guest1)
+    @karaoke_bar.check_guest_in(@room1, @guest2)
+            binding.pry
+    @karaoke_bar.check_guest_out(@room1, @guest1)
+    assert_equal(1, @room1.number_of_guests_in_room)
+  end
+
+  def test_can_check_guest_out_of_selected_room__guest_not_in_room
+    guest_not_in_room = @karaoke_bar.check_guest_out(@room1, @guest1)
+    assert_equal("#{@guest1.name} is not in this room!", guest_not_in_room)
   end
 
 
