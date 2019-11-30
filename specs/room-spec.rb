@@ -49,21 +49,5 @@ class RoomTest < MiniTest::Test
   def test_room_song_list_starts_empty
     assert_equal(0, @room1.number_of_songs_in_room)
   end
-
-  # def test_can_get_number_of_guests_in_room
-  #   assert_equal(2, @room2.number_of_guests_in_room)
-  # end
-
-  # def test_can_get_room_guest_list
-  #   assert_equal([@guest1, @guest2], @room2.room_guest_list)
-  # end
-  #
-  # def test_can_get_number_of_songs_in_room
-  #   assert_equal(2, @room2.number_of_songs_in_room())
-  # end
-  #
-  # def test_can_get_room_song_list
-  #   assert_equal([@song1, @song2], @room2.room_song_list())
-  # end
-
+  
 end

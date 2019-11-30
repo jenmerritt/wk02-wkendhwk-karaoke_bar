@@ -62,6 +62,11 @@ class KaraokeBarTest < MiniTest::Test
     assert_equal([@room1, @room2, @room3], @karaoke_bar.return_room_list)
   end
 
+  def test_can_add_song_to_karaoke_bar_song_list
+    @karaoke_bar.add_song_to_karaoke_bar_list(@song1)
+    assert_equal(6, @karaoke_bar.number_of_songs)
+  end
+
 # tests for methods that check guests into and out of a specific room created in the room class
 
   def test_can_check_guest_into_selected_room
@@ -77,7 +82,6 @@ class KaraokeBarTest < MiniTest::Test
   def test_can_check_guest_out_of_selected_room__guest_is_in_room
     @karaoke_bar.check_guest_in(@room1, @guest1)
     @karaoke_bar.check_guest_in(@room1, @guest2)
-            binding.pry
     @karaoke_bar.check_guest_out(@room1, @guest1)
     assert_equal(1, @room1.number_of_guests_in_room)
   end
@@ -86,6 +90,44 @@ class KaraokeBarTest < MiniTest::Test
     guest_not_in_room = @karaoke_bar.check_guest_out(@room1, @guest1)
     assert_equal("#{@guest1.name} is not in this room!", guest_not_in_room)
   end
+
+# tests for methods that add songs into and remove songs out of a specific room created in the room class
+# no need to check if it already exist - as the song could be queued multiple times!
+# note that removing a song from the queue removes all instances of that song from the queue
+
+    def test_can_add_song_to_room
+      @karaoke_bar.add_song_to_queue(@room1, @song1)
+      @karaoke_bar.add_song_to_queue(@room1, @song2)
+      assert_equal(2, @room1.number_of_songs_in_room)
+    end
+
+    def test_can_remove_song_from_room
+      @karaoke_bar.add_song_to_queue(@room1, @song1)
+      @karaoke_bar.add_song_to_queue(@room1, @song1)
+      @karaoke_bar.add_song_to_queue(@room1, @song1)
+      @karaoke_bar.remove_song_from_queue(@room1, @song1)
+      assert_equal(0, @room1.number_of_songs_in_room)
+    end
+
+    def test_can_find_song_by_title__found
+      song_found = @karaoke_bar.find_song_by_title(@song_list, "Wannabe")
+      assert_equal(@song3, song_found)
+    end
+
+    # def test_can_find_song_by_title__not_found
+    #   assert_equal("Sorry we don't have it", @karaoke_bar.find_song_by_title(@song_list, "Suspicious Minds"))
+    # end
+
+    # def test_can_add_song_to_room_by_title__song_exists
+    #   song = @karaoke_bar.find_song_by_title(@song_list, "Wannabe")
+    #   @karaoke_bar.add_song_to_queue(song)
+    #   assert_equal(1, @room1.number_of_songs_in_room)
+    # end
+
+    # def test_can_add_song_to_room_by_title__song_does_not_exist
+    #   song_does_not_exist = @karaoke_bar.find_song_by_title(@song_list, "Suspicious Minds")
+    #   assert_equal("Sorry, we don't have the song: Wannabe", song_does_not_exist)
+    # end
 
 
 end

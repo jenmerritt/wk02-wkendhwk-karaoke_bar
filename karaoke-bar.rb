@@ -33,7 +33,13 @@ class KaraokeBar
     return @rooms
   end
 
-# method to check guests into a specific room created in the room class
+# method to add song to karaoke bar song list
+
+  def add_song_to_karaoke_bar_list(song)
+    @songs << song
+  end
+
+# methods to check guests into and out of a specific room created in the room class
 
   def check_guest_in(room, guest_to_check_in)
     room.room_guest_list << guest_to_check_in
@@ -57,5 +63,25 @@ class KaraokeBar
     return "#{guest_to_check_out.name} is not in this room!"
   end
 
+# methods to add/remove songs from a song queue in a specific room created in the room class
+
+  def add_song_to_queue(room, song)
+    room.room_song_list << song
+  end
+
+  def remove_song_from_queue(room, song)
+    room.room_song_list.delete(song)
+  end
+
+# methods to add/remove songs by title / artist / decade
+
+  def find_song_by_title(song_list, song_title)
+    for song in song_list
+      if song_title == song[:title]
+        song_list << song
+      end
+    end
+    return "Sorry we don't have that song!"
+  end
 
 end
