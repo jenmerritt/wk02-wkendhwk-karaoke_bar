@@ -17,6 +17,8 @@ class RoomTest < MiniTest::Test
     @room3 = Room.new("Room 3", 2)
   end
 
+# getter tests for room properties
+
   def test_can_get_room_name
     assert_equal("Room 1", @room1.name)
   end

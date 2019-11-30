@@ -13,6 +13,50 @@ require_relative('../guest')
 class KaraokeBarTest < MiniTest::Test
 
   def setup
+    @song1 = Song.new("Whitney Houston", "I Wanna Dance With Somebody", "1980s")
+    @song2 = Song.new("Adele", "When We Were Young", "2010s")
+    @song3 = Song.new("Spice Girls", "Wannabe", "1990s")
+    @song4 = Song.new("Mariah Carey", "All I Want For Christmas", "1990s")
+    @song5 = Song.new("Blondie", "Heart Of Glass", "1970s")
+    @song_list = [@song1, @song2, @song3, @song4, @song5]
+    @room1 = Room.new("Room 1", 5)
+    @room2 = Room.new("Room 2", 10)
+    @room3 = Room.new("Room 3", 2)
+    @room_list = [@room1, @room2, @room3]
+    @karaoke_bar = KaraokeBar.new("Supercuboid", 1000, @room_list, @song_list, 10)
   end
+
+# getter tests for karaoke bar properties
+
+  def test_can_get_bar_name
+    assert_equal("Supercuboid", @karaoke_bar.name)
+  end
+
+  def test_can_get_till_total
+    assert_equal(1000, @karaoke_bar.till)
+  end
+
+  def test_can_get_number_of_songs
+    assert_equal(5, @karaoke_bar.number_of_songs)
+  end
+
+  def test_can_get_song_list
+    assert_equal([@song1, @song2, @song3, @song4, @song5], @karaoke_bar.return_song_list)
+  end
+
+  def test_can_get_number_of_rooms
+    assert_equal(3, @karaoke_bar.number_of_rooms)
+  end
+
+  def test_can_get_list_of_rooms
+    assert_equal([@room1, @room2, @room3], @karaoke_bar.return_room_list)
+  end
+
+# tests for methods that check guests into and out of a specific room created in the room class
+
+  # def test_can_check_guest_into_selected_room
+  #
+  # end
+
 
 end

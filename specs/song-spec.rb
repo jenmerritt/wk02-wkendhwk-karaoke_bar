@@ -17,6 +17,8 @@ class SongTest < MiniTest::Test
     @song5 = Song.new("Blondie", "Heart Of Glass", "1970s")
   end
 
+  # getter tests for song properties
+
   def test_can_get_song_artist
     assert_equal("Whitney Houston", @song1.artist)
   end

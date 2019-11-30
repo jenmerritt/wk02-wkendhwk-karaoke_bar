@@ -16,6 +16,8 @@ class GuestTest < MiniTest::Test
     @guest4 = Guest.new("Regina Phalange", 80)
   end
 
+# getter tests for guest properties
+
   def test_can_get_guest_name
     assert_equal("Ken Adams", @guest3.name)
   end
