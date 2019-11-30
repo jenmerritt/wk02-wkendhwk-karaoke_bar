@@ -114,20 +114,23 @@ class KaraokeBarTest < MiniTest::Test
       assert_equal(@song3, song_found)
     end
 
-    # def test_can_find_song_by_title__not_found
-    #   assert_equal("Sorry we don't have it", @karaoke_bar.find_song_by_title(@song_list, "Suspicious Minds"))
-    # end
+    def test_can_find_song_by_title__not_found
+      song_not_found = @karaoke_bar.find_song_by_title(@song_list, "Suspicious Minds")
+      assert_nil(song_not_found)
+    end
 
-    # def test_can_add_song_to_room_by_title__song_exists
-    #   song = @karaoke_bar.find_song_by_title(@song_list, "Wannabe")
-    #   @karaoke_bar.add_song_to_queue(song)
-    #   assert_equal(1, @room1.number_of_songs_in_room)
-    # end
+# tests for adding songs into rooms by searching for properties of that song
 
-    # def test_can_add_song_to_room_by_title__song_does_not_exist
-    #   song_does_not_exist = @karaoke_bar.find_song_by_title(@song_list, "Suspicious Minds")
-    #   assert_equal("Sorry, we don't have the song: Wannabe", song_does_not_exist)
-    # end
+    def test_can_add_song_to_room_by_title__song_found
+      @karaoke_bar.add_song_to_queue_by_title(@song_list, @room1, "Wannabe")
+      assert_equal(1, @room1.number_of_songs_in_room)
+      assert_equal([@song3], @room1.room_song_list)
+    end
+
+    def test_can_add_song_to_room_by_title__song_not_found
+      song_does_not_exist = @karaoke_bar.add_song_to_queue_by_title(@song_list, @room1, "Suspicious Minds")
+      assert_equal("Sorry, we don't have Suspicious Minds!", song_does_not_exist)
+    end
 
 
 end

@@ -3,7 +3,7 @@
 
 class Song
 
-  attr_reader :artist, :decade, :title
+  attr_reader :artist, :title, :decade
 
   def initialize(artist, title, decade)
     @artist = artist

@@ -75,13 +75,39 @@ class KaraokeBar
 
 # methods to add/remove songs by title / artist / decade
 
+  # def find_song_by_title(song_list, song_title)
+  #   for song in song_list
+  #     if song.title == song_title
+  #       return song
+  #     end
+  #   end
+  #   return "Sorry, we don't have #{song_title}!"
+  # end
+
+  # def add_song_to_queue_by_title(song_list, room, song_title)
+  #   for song in song_list
+  #     if song.title == song_title
+  #       add_song_to_queue(room, song)
+  #     end
+  #   end
+  #     return "Sorry, we don't have #{song_title}!"
+  # end
+
   def find_song_by_title(song_list, song_title)
     for song in song_list
-      if song_title == song[:title]
-        song_list << song
+      if song.title == song_title
+        return song
       end
     end
-    return "Sorry we don't have that song!"
+    return nil
+  end
+
+  def add_song_to_queue_by_title(song_list, room, song_title)
+    song = find_song_by_title(song_list, song_title)
+    if song != nil
+      then add_song_to_queue(room, song)
+    end
+      return "Sorry, we don't have #{song_title}!"
   end
 
 end
