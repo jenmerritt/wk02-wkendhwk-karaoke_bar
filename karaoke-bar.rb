@@ -35,6 +35,9 @@ class KaraokeBar
 
 # method to check guests into a specific room created in the room class
 
+  def check_guest_in(room, guest)
+    room.room_guest_list << guest
+  end
 
 
 end
