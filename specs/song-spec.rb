@@ -17,15 +17,15 @@ class SongTest < MiniTest::Test
     @song5 = Song.new("Blondie", "Heart Of Glass", "1970s")
   end
 
-  def test_can_get_artist
+  def test_can_get_song_artist
     assert_equal("Whitney Houston", @song1.artist)
   end
 
-  def test_can_get_title
+  def test_can_get_song_title
     assert_equal("Wannabe", @song3.title)
   end
 
-  def test_can_get_decade
+  def test_can_get_song_decade
     assert_equal("2010s", @song2.decade)
   end
 
