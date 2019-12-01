@@ -43,16 +43,6 @@ class KaraokeBar
 
 # methods to check guests into and out of a specific room created in the room class
 
-  # def check_guest_in(room, guest_to_check_in)
-  #   for guest in room.room_guest_list
-  #     if guest == guest_to_check_in
-  #         return "#{guest_to_check_in} is already in this room!"
-  #       else
-  #         room.room_guest_list << guest_to_check_in
-  #     end
-  #   end
-  # end
-
   def add_guest_to_room(room, guest)
       room.room_guest_list << guest
   end
@@ -67,6 +57,10 @@ class KaraokeBar
   end
 
   def check_guest_in(room, guest_to_check_in)
+    pre_check = check_if_guest_in_room(room, guest_to_check_in)
+    if pre_check == true
+      return "#{guest_to_check_in.name} is already in this room!"
+    end
       room.room_guest_list << guest_to_check_in
   end
 
