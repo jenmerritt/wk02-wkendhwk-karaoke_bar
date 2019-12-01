@@ -115,6 +115,11 @@ class KaraokeBar
     return songs_found_by_artist
   end
 
+  def find_song_by_decade(song_list, decade)
+    songs_found_by_decade = song_list.find_all { |song| decade == song.decade }
+    return songs_found_by_decade
+  end
+
   # def find_song_by_artist(song_list, artist)
   #   for song in song_list
   #     if song.artist == artist
