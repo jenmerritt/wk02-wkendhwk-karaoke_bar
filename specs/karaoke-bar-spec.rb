@@ -70,6 +70,18 @@ class KaraokeBarTest < MiniTest::Test
     assert_equal(10, @karaoke_bar.entry_fee)
   end
 
+# add or remove cash from till
+
+  def test_can_add_cash_to_till
+    @karaoke_bar.add_cash(10)
+    assert_equal(1010, @karaoke_bar.till)
+  end
+
+  def test_can_remove_cash_from_till
+    @karaoke_bar.remove_cash(10)
+    assert_equal(990, @karaoke_bar.till)
+  end
+
 ############
 ### GUESTS
 ############
@@ -98,7 +110,7 @@ class KaraokeBarTest < MiniTest::Test
 
 # guest pays entry fee
 
-    
+
 
 # tests for methods that check guests into and out of a specific room created in the room class
 

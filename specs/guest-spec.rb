@@ -28,12 +28,12 @@ class GuestTest < MiniTest::Test
 
 # add / remove cash
 
-  def test_can_add_cash
+  def test_can_add_cash_to_wallet
     @guest1.add_cash(10)
     assert_equal(60, @guest1.wallet)
   end
 
-  def test_can_remove_cash
+  def test_can_remove_cash_from_wallet
     @guest1.remove_cash(10)
     assert_equal(40, @guest1.wallet)
   end

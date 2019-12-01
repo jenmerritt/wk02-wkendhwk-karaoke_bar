@@ -37,6 +37,16 @@ class KaraokeBar
     return @rooms
   end
 
+# add or remove cash from till
+
+  def add_cash(amount)
+    @till += amount
+  end
+
+  def remove_cash(amount)
+    @till -= amount
+  end
+
 ###########
 ### GUESTS
 ###########
