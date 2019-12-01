@@ -14,7 +14,7 @@ class KaraokeBarTest < MiniTest::Test
 
   def setup
     @guest1 = Guest.new("Phoebe Buffae", 50)
-    @guest2 = Guest.new("Joey Tribiani", 30)
+    @guest2 = Guest.new("Joey Tribiani", 10)
     @guest3 = Guest.new("Ken Adams", 5)
     @guest4 = Guest.new("Regina Phalange", 80)
     @song1 = Song.new("Whitney Houston", "I Wanna Dance With Somebody", "1980s")
@@ -78,6 +78,27 @@ class KaraokeBarTest < MiniTest::Test
     @karaoke_bar.add_guest_to_room(@room1, @guest1)
     assert_equal(1, @room1.number_of_guests_in_room)
   end
+
+# check if guest has enough money to pay entry fee, or not.
+
+    def test_can_guest_afford_entry_fee__true_greater_than
+      check = @karaoke_bar.can_guest_afford_entry(@karaoke_bar.entry_fee, @guest1.wallet)
+      assert_equal(true, check)
+    end
+
+    def test_can_guest_afford_entry_fee__true_equal
+      check = @karaoke_bar.can_guest_afford_entry(@karaoke_bar.entry_fee, @guest2.wallet)
+      assert_equal(true, check)
+    end
+
+    def test_can_guest_afford_entry_fee__false
+      check = @karaoke_bar.can_guest_afford_entry(@karaoke_bar.entry_fee, @guest3.wallet)
+      assert_equal(false, check)
+    end
+
+# guest pays entry fee
+
+    
 
 # tests for methods that check guests into and out of a specific room created in the room class
 

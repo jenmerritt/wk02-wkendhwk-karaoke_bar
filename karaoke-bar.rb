@@ -41,6 +41,12 @@ class KaraokeBar
 ### GUESTS
 ###########
 
+# method to check if guest can afford entry
+
+  def can_guest_afford_entry(fee, wallet)
+    wallet >= fee
+  end
+
 # methods to check guests into and out of a specific room created in the room class
 
   def add_guest_to_room(room, guest)

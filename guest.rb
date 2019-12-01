@@ -10,4 +10,12 @@ class Guest
     @wallet = wallet
   end
 
+  def add_cash(amount)
+    return @wallet += amount
+  end
+
+  def remove_cash(amount)
+    return @wallet -= amount
+  end
+
 end
