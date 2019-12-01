@@ -36,6 +36,10 @@ class KaraokeBarTest < MiniTest::Test
     @karaoke_bar = KaraokeBar.new("Supercuboid", 1000, @room_list, @song_list, 10)
   end
 
+#############
+### GETTERS
+#############
+
 # getter tests for karaoke bar properties
 
   def test_can_get_bar_name
@@ -66,12 +70,22 @@ class KaraokeBarTest < MiniTest::Test
     assert_equal(10, @karaoke_bar.entry_fee)
   end
 
-  def test_can_add_song_to_karaoke_bar_song_list
-    @karaoke_bar.add_song_to_karaoke_bar_list(@song1)
-    assert_equal(6, @karaoke_bar.number_of_songs)
-  end
+############
+### GUESTS
+############
 
 # tests for methods that check guests into and out of a specific room created in the room class
+
+  def test_if_guest_is_in_room_list__true
+    @karaoke_bar.check_guest_in(@room1, @guest1)
+    check = @karaoke_bar.check_if_guest_in_room(@room1, @guest1)
+    assert_equal(true, check)
+  end
+
+  def test_if_guest_is_in_room_list__false
+    check = @karaoke_bar.check_if_guest_in_room(@room1, @guest1)
+    assert_equal(false, check)
+  end
 
   def test_can_check_guest_into_selected_room
     @karaoke_bar.check_guest_in(@room1, @guest1)
@@ -93,6 +107,15 @@ class KaraokeBarTest < MiniTest::Test
   def test_can_check_guest_out_of_selected_room__guest_not_in_room
     guest_not_in_room = @karaoke_bar.check_guest_out(@room1, @guest1)
     assert_equal("#{@guest1.name} is not in this room!", guest_not_in_room)
+  end
+
+##############
+### SONGS
+#############
+
+  def test_can_add_song_to_karaoke_bar_song_list
+    @karaoke_bar.add_song_to_karaoke_bar_list(@song1)
+    assert_equal(6, @karaoke_bar.number_of_songs)
   end
 
 # tests for methods that add songs into and remove songs out of a specific room created in the room class

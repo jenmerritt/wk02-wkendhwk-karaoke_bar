@@ -13,6 +13,10 @@ class KaraokeBar
     @entry_fee = entry_fee
   end
 
+#############
+### GETTERS
+#############
+
 # getter methods for song list
 
   def number_of_songs()
@@ -33,26 +37,38 @@ class KaraokeBar
     return @rooms
   end
 
-# method to add song to karaoke bar song list
-
-  def add_song_to_karaoke_bar_list(song)
-    @songs << song
-  end
+###########
+### GUESTS
+###########
 
 # methods to check guests into and out of a specific room created in the room class
 
-  def check_guest_in(room, guest_to_check_in)
-    room.room_guest_list << guest_to_check_in
+  # def check_guest_in(room, guest_to_check_in)
+  #   for guest in room.room_guest_list
+  #     if guest == guest_to_check_in
+  #         return "#{guest_to_check_in} is already in this room!"
+  #       else
+  #         room.room_guest_list << guest_to_check_in
+  #     end
+  #   end
+  # end
+
+  def add_guest_to_room(room, guest)
+      room.room_guest_list << guest
   end
 
-                  # def check_guest_in(room, guest_to_check_in)
-                  #   for guest in room.room_guest_list
-                  #     if guest_to_check_in != guest
-                  #       room.room_guest_list << guest_to_check_in
-                  #     end
-                  #   end
-                  #   return "#{guest_to_check_in.name} is already in this room!"
-                  # end
+  def check_if_guest_in_room(room, guest_to_check)
+    for guest in room.room_guest_list
+      if guest == guest_to_check
+        return true
+      end
+    end
+    return false
+  end
+
+  def check_guest_in(room, guest_to_check_in)
+      room.room_guest_list << guest_to_check_in
+  end
 
   def check_guest_out(room, guest_to_check_out)
     for guest in room.room_guest_list
@@ -63,7 +79,17 @@ class KaraokeBar
     return "#{guest_to_check_out.name} is not in this room!"
   end
 
-# methods to add/remove songs from a song queue in a specific room created in the room class
+###########
+#### SONGS
+###########
+
+# method to add song to karaoke bar song list - song is known
+
+  def add_song_to_karaoke_bar_list(song)
+    @songs << song
+  end
+
+# methods to add/remove songs from a song queue in a specific room created in the room class when the song is known
 
   def add_song_to_queue(room, song)
     room.room_song_queue << song
@@ -73,39 +99,7 @@ class KaraokeBar
     room.room_song_queue.delete(song)
   end
 
-###### refactored - different ways of managing finding a song and adding to queue:
-
-                      # def return_songs_by_title(song_list, song_title)
-                      #   for song in song_list
-                      #     if song.title == song_title
-                      #       return song
-                      #     end
-                      #   end
-                      #   return "Sorry, we don't have #{song_title}!"
-                      # end
-                      #
-                      # def add_song_to_queue_by_title(song_list, room, song_title)
-                      #   for song in song_list
-                      #     if song.title == song_title
-                      #       add_song_to_queue(room, song)
-                      #     end
-                      #   end
-                      #     return "Sorry, we don't have #{song_title}!"
-                      # end
-
-#### refactored
-                      # def return_songs_by_title(song_list, song_title)
-                      #   songs_found = []
-                      #   for song in song_list
-                      #     if song.title == song_title
-                      #       songs_found.push(song)
-                      #     end
-                      #   end
-                      #   return songs_found
-                      # end
-###########
-
-# methods to find songs by title / artist / decade
+# methods to find songs by title / artist / decade and return array of all songs that match
 
   def find_a_song(song_list, song)
     song_found = song_list.find_all { |song_in_list| song_in_list == song }
@@ -125,6 +119,8 @@ class KaraokeBar
     songs_found_by_decade = song_list.find_all { |song| decade == song.decade }
     return songs_found_by_decade
   end
+
+# methods to add songs to a room queue by first getting a list of songs with a specific title / artist / decade then selecting a song from that list to add to the queue
 
   def add_song_to_queue_by_title(song_list, room, title, song)
     songs_with_title = return_songs_by_title(song_list, title)
@@ -153,6 +149,37 @@ class KaraokeBar
     return "Sorry, we don't have any songs from the #{decade}!"
   end
 
+###### refactored - different ways of managing finding a song and adding to queue:
+
+      # def return_songs_by_title(song_list, song_title)
+      #   for song in song_list
+      #     if song.title == song_title
+      #       return song
+      #     end
+      #   end
+      #   return "Sorry, we don't have #{song_title}!"
+      # end
+      #
+      # def add_song_to_queue_by_title(song_list, room, song_title)
+      #   for song in song_list
+      #     if song.title == song_title
+      #       add_song_to_queue(room, song)
+      #     end
+      #   end
+      #     return "Sorry, we don't have #{song_title}!"
+      # end
+
+  #### refactored
+      # def return_songs_by_title(song_list, song_title)
+      #   songs_found = []
+      #   for song in song_list
+      #     if song.title == song_title
+      #       songs_found.push(song)
+      #     end
+      #   end
+      #   return songs_found
+      # end
+  ###########
 
 
 end
