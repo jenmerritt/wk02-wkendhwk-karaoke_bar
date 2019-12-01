@@ -46,8 +46,8 @@ class RoomTest < MiniTest::Test
     assert_equal(0, @room1.number_of_guests_in_room)
   end
 
-  def test_room_song_list_starts_empty
+  def test_room_song_queue_starts_empty
     assert_equal(0, @room1.number_of_songs_in_room)
   end
-  
+
 end

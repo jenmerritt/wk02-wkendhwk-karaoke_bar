@@ -24,10 +24,10 @@ class Room
     return @songs.length()
   end
 
-  def room_song_list()
+  def room_song_queue()
     return @songs
   end
-
+# room_song_list
 
 
 end

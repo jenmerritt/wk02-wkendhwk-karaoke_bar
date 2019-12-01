@@ -62,6 +62,10 @@ class KaraokeBarTest < MiniTest::Test
     assert_equal([@room1, @room2, @room3], @karaoke_bar.return_room_list)
   end
 
+  def test_can_get_entry_fee
+    assert_equal(10, @karaoke_bar.entry_fee)
+  end
+
   def test_can_add_song_to_karaoke_bar_song_list
     @karaoke_bar.add_song_to_karaoke_bar_list(@song1)
     assert_equal(6, @karaoke_bar.number_of_songs)
@@ -114,78 +118,90 @@ class KaraokeBarTest < MiniTest::Test
     # by title
 
     def test_can_find_song_by_title__one_found
-      song_found = @karaoke_bar.find_song_by_title(@song_list, "Wannabe")
+      song_found = @karaoke_bar.return_songs_by_title(@song_list, "Wannabe")
       assert_equal([@song3], song_found)
     end
 
     def test_can_find_song_by_title__multiple_found
-      songs_found = @karaoke_bar.find_song_by_title(@song_list, "When We Were Young")
+      songs_found = @karaoke_bar.return_songs_by_title(@song_list, "When We Were Young")
       assert_equal([@song2, @song5], songs_found)
     end
 
     def test_can_find_song_by_title__not_found
-      song_not_found = @karaoke_bar.find_song_by_title(@song_list, "Suspicious Minds")
+      song_not_found = @karaoke_bar.return_songs_by_title(@song_list, "Suspicious Minds")
       assert_equal([], song_not_found)
     end
 
     # by artist
-    
+
     def test_can_find_song_by_artist__one_found
-      song_found = @karaoke_bar.find_song_by_artist(@song_list, "Adele")
+      song_found = @karaoke_bar.return_songs_by_artist(@song_list, "Adele")
       assert_equal([@song2], song_found)
     end
 
     def test_can_find_song_by_artist__multiple_found
-      songs_found = @karaoke_bar.find_song_by_artist(@song_list, "Whitney Houston")
+      songs_found = @karaoke_bar.return_songs_by_artist(@song_list, "Whitney Houston")
       assert_equal([@song1, @song4], songs_found)
     end
 
     def test_can_find_song_by_artist__not_found
-      song_not_found = @karaoke_bar.find_song_by_artist(@song_list, "Britney Lovato")
+      song_not_found = @karaoke_bar.return_songs_by_artist(@song_list, "Britney Lovato")
       assert_equal([], song_not_found)
     end
 
     # by decade
 
     def test_can_find_song_by_decade__one_found
-      song_found = @karaoke_bar.find_song_by_decade(@song_list, "2010s")
+      song_found = @karaoke_bar.return_songs_by_decade(@song_list, "2010s")
       assert_equal([@song2], song_found)
     end
 
     def test_can_find_song_by_decade__multiple_found
-      songs_found = @karaoke_bar.find_song_by_decade(@song_list, "1990s")
+      songs_found = @karaoke_bar.return_songs_by_decade(@song_list, "1990s")
       assert_equal([@song3, @song4], songs_found)
     end
 
     def test_can_find_song_by_decade__not_found
-      song_not_found = @karaoke_bar.find_song_by_decade(@song_list, "1950s")
+      song_not_found = @karaoke_bar.return_songs_by_decade(@song_list, "1950s")
       assert_equal([], song_not_found)
     end
 
 
 # tests for adding songs into rooms by searching for properties of that song
 
-    # def test_can_add_song_to_room_by_title__song_found
-    #   @karaoke_bar.add_song_to_queue_by_title(@song_list, @room1, "When We Were Young")
-    #   assert_equal(1, @room1.number_of_songs_in_room)
-    #   assert_equal([@song2, @song5], @room1.room_song_list)
-    # end
+    def test_can_add_song_to_room_by_title__song_found
+      @karaoke_bar.add_song_to_queue_by_title(@song_list, @room1, "When We Were Young", @song2)
+      assert_equal(1, @room1.number_of_songs_in_room)
+      assert_equal([@song2], @room1.room_song_queue)
+    end
 
-    # def test_can_add_song_to_room_by_title__song_not_found
-    #   song_does_not_exist = @karaoke_bar.add_song_to_queue_by_title(@song_list, @room1, "Suspicious Minds")
-    #   assert_equal("Sorry, we don't have Suspicious Minds!", song_does_not_exist)
-    # end
-    #
-    # def test_can_add_song_to_room_by_artist__song_found
-    #   @karaoke_bar.add_song_to_queue_by_artist(@song_list, @room1, "Whitney Houston")
-    #   assert_equal(1, @room1.number_of_songs_in_room)
-    #   assert_equal([@song1], @room1.room_song_list)
-    # end
+    def test_can_add_song_to_room_by_title__song_not_found
+      song_does_not_exist = @karaoke_bar.add_song_to_queue_by_title(@song_list, @room1, "Suspicious Minds", @song2)
+      assert_equal("Sorry, we don't have Suspicious Minds!", song_does_not_exist)
+    end
 
-    # def test_can_add_song_to_room_by_artist__song_not_found
-    #   song_does_not_exist = @karaoke_bar.add_song_to_queue_by_artist(@song_list, @room1, "Britney Lovato")
-    #   assert_equal("Sorry, we don't have any songs by Britney Lovato!", song_does_not_exist)
-    # end
+    def test_can_add_song_to_room_by_artist__song_found
+      @karaoke_bar.add_song_to_queue_by_artist(@song_list, @room1, "Whitney Houston", @song1)
+      assert_equal(1, @room1.number_of_songs_in_room)
+      assert_equal([@song1], @room1.room_song_queue)
+    end
+
+    def test_can_add_song_to_room_by_artist__song_not_found
+      song_does_not_exist = @karaoke_bar.add_song_to_queue_by_artist(@song_list, @room1, "Britney Lovato", @song1)
+      assert_equal("Sorry, we don't have any songs by Britney Lovato!", song_does_not_exist)
+    end
+
+    def test_can_add_song_to_room_by_decade__decade_has_songs
+      @karaoke_bar.add_song_to_queue_by_decade(@song_list, @room1, "1990s", @song1)
+      assert_equal(1, @room1.number_of_songs_in_room)
+      assert_equal([@song1], @room1.room_song_queue)
+    end
+
+    def test_can_add_song_to_room_by_decade__no_songs
+      no_songs = @karaoke_bar.add_song_to_queue_by_decade(@song_list, @room1, "1950s", @song1)
+      assert_equal(0, @room1.number_of_songs_in_room)
+      assert_equal("Sorry, we don't have any songs from the 1950s!", no_songs)
+    end
 
 
 end
