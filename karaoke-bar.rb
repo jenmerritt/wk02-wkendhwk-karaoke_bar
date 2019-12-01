@@ -57,6 +57,22 @@ class KaraokeBar
     wallet >= fee
   end
 
+# method to check if room capacity will be exceeded or not
+
+  def check_capacity(guest_list, capacity)
+    guest_list < capacity
+  end
+
+# method to sell admission
+
+  def sell_admission(fee, guest)
+    can_afford = can_guest_afford_entry(fee, guest.wallet)
+    if can_afford == true
+      add_cash(fee)
+      guest.remove_cash(fee)
+    end
+  end
+
 # methods to check guests into and out of a specific room created in the room class
 
   def add_guest_to_room(room, guest)
@@ -72,12 +88,17 @@ class KaraokeBar
     return false
   end
 
-  def check_guest_in(room, guest_to_check_in)
-    pre_check = check_if_guest_in_room(room, guest_to_check_in)
-    if pre_check == true
-      return "#{guest_to_check_in.name} is already in this room!"
-    end
+  def check_guest_in(fee, room, guest_to_check_in)
+    pre_check_can_afford = can_guest_afford_entry(fee, guest_to_check_in.wallet)
+    pre_check_in_room = check_if_guest_in_room(room, guest_to_check_in)
+    pre_check_space_available = check_capacity(room.number_of_guests_in_room, room.capacity)
+    if pre_check_can_afford == true && pre_check_space_available == true
+      if pre_check_in_room == true
+        return "#{guest_to_check_in.name} is already in this room!"
+      end
+      sell_admission(fee, guest_to_check_in)
       room.room_guest_list << guest_to_check_in
+    end
   end
 
   def check_guest_out(room, guest_to_check_out)
@@ -92,6 +113,16 @@ class KaraokeBar
 ###########
 #### SONGS
 ###########
+
+# favourite song cheer
+
+def favourite_song_cheer(room, guest)
+  for song in room.room_song_queue
+    if song == guest.favourite_song
+      return "WooHoo!"
+    end
+  end
+end
 
 # method to add song to karaoke bar song list - song is known
 

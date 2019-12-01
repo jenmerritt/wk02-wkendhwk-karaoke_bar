@@ -17,10 +17,10 @@ class RoomTest < MiniTest::Test
     @song3 = Song.new("Spice Girls", "Wannabe", "1990s")
     @song4 = Song.new("Mariah Carey", "All I Want For Christmas", "1990s")
     @song5 = Song.new("Blondie", "Heart Of Glass", "1970s")
-    @guest1 = Guest.new("Phoebe Buffae", 50)
-    @guest2 = Guest.new("Joey Tribiani", 30)
-    @guest3 = Guest.new("Ken Adams", 5)
-    @guest4 = Guest.new("Regina Phalange", 80)
+    @guest1 = Guest.new("Phoebe Buffae", 50, @song1)
+    @guest2 = Guest.new("Joey Tribiani", 30, @song2)
+    @guest3 = Guest.new("Ken Adams", 5, @song3)
+    @guest4 = Guest.new("Regina Phalange", 80, @song4)
     # @songs1 = []
     # @songs2 = [@song1, @song2]
     # @songs3 = []

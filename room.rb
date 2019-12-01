@@ -1,4 +1,4 @@
-require('pry')
+# require('pry')
 # binding.pry
 
 class Room
@@ -27,7 +27,6 @@ class Room
   def room_song_queue()
     return @songs
   end
-# room_song_list
 
 
 end
