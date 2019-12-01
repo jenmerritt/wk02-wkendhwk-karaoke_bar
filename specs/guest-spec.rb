@@ -1,6 +1,4 @@
-# require('pry')
-# binding.pry
-
+require('pry')
 require('minitest/autorun')
 require('minitest/reporters')
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
@@ -25,27 +23,31 @@ class GuestTest < MiniTest::Test
 # getter tests for guest properties
 
   def test_can_get_guest_name
-    assert_equal("Ken Adams", @guest3.name)
+    assert_equal("Ken Adams", @guest3.name())
   end
 
   def test_can_get_guest_wallet
-    assert_equal(50, @guest1.wallet)
+    assert_equal(50, @guest1.wallet())
   end
 
   def test_can_get_favourite_song
-    assert_equal(@song1, @guest1.favourite_song)
+    assert_equal(@song1, @guest1.favourite_song())
   end
 
-# add / remove cash
+  def test_guest_can_cheer
+    assert_equal("WooHoo!", @guest1.cheer())
+  end
+
+# add / remove cash from wallet
 
   def test_can_add_cash_to_wallet
     @guest1.add_cash(10)
-    assert_equal(60, @guest1.wallet)
+    assert_equal(60, @guest1.wallet())
   end
 
   def test_can_remove_cash_from_wallet
     @guest1.remove_cash(10)
-    assert_equal(40, @guest1.wallet)
+    assert_equal(40, @guest1.wallet())
   end
 
 end

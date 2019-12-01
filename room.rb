@@ -1,9 +1,8 @@
-# require('pry')
-# binding.pry
+require('pry')
 
 class Room
 
-  attr_reader :name, :capacity
+  attr_reader(:name, :capacity)
 
   def initialize(name, capacity, guests, songs)
     @name = name

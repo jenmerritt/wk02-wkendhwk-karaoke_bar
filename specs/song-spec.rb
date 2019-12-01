@@ -1,6 +1,4 @@
-# require('pry')
-# binding.pry
-
+require('pry')
 require('minitest/autorun')
 require('minitest/reporters')
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
@@ -17,18 +15,18 @@ class SongTest < MiniTest::Test
     @song5 = Song.new("Blondie", "Heart Of Glass", "1970s")
   end
 
-  # getter tests for song properties
+# getter tests for song properties
 
   def test_can_get_song_artist
-    assert_equal("Whitney Houston", @song1.artist)
+    assert_equal("Whitney Houston", @song1.artist())
   end
 
   def test_can_get_song_title
-    assert_equal("Wannabe", @song3.title)
+    assert_equal("Wannabe", @song3.title())
   end
 
   def test_can_get_song_decade
-    assert_equal("2010s", @song2.decade)
+    assert_equal("2010s", @song2.decade())
   end
 
 end
