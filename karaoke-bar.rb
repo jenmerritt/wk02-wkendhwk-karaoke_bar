@@ -73,8 +73,7 @@ class KaraokeBar
     room.room_song_list.delete(song)
   end
 
-# methods to add/remove songs by title / artist / decade
-
+# possibly redundant - differnet ways of managing finding a song and adding to queue:
   # def find_song_by_title(song_list, song_title)
   #   for song in song_list
   #     if song.title == song_title
@@ -93,21 +92,57 @@ class KaraokeBar
   #     return "Sorry, we don't have #{song_title}!"
   # end
 
+
+# methods to add/remove songs by title / artist / decade
+
+  # def find_song_by_title(song_list, song_title)
+  #   songs_found = []
+  #   for song in song_list
+  #     if song.title == song_title
+  #       songs_found.push(song)
+  #     end
+  #   end
+  #   return songs_found
+  # end
+
   def find_song_by_title(song_list, song_title)
-    for song in song_list
-      if song.title == song_title
-        return song
-      end
-    end
-    return nil
+    songs_found_by_title = song_list.find_all { |song| song_title == song.title }
+    return songs_found_by_title
   end
 
-  def add_song_to_queue_by_title(song_list, room, song_title)
-    song = find_song_by_title(song_list, song_title)
-    if song != nil
-      then add_song_to_queue(room, song)
-    end
-      return "Sorry, we don't have #{song_title}!"
+  def find_song_by_artist(song_list, artist)
+    songs_found_by_artist = song_list.find_all { |song| artist == song.artist }
+    return songs_found_by_artist
   end
+
+  # def find_song_by_artist(song_list, artist)
+  #   for song in song_list
+  #     if song.artist == artist
+  #       return song
+  #     end
+  #   end
+  #   return nil
+  # end
+
+  # def add_song_to_queue_by_title(song_list, room, song_title)
+  #   songs_found = find_song_by_title(song_list, song_title)
+  #   if songs_found != []
+  #     for song in songs_found
+  #       add_song_to_queue(room, song)
+  #     end
+  #   end
+  #     return "Sorry, we don't have #{song_title}!"
+  # end
+  #
+  # def add_song_to_queue_by_artist(song_list, room, artist)
+  #             binding.pry
+  #   song = find_song_by_artist(song_list, artist)
+  #   if song != nil
+  #     then add_song_to_queue(room, song)
+  #   end
+  #     return "Sorry, we don't have any songs by #{artist}!"
+  # end
+
+
 
 end
